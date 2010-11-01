@@ -1,8 +1,12 @@
 # import commen modules
 import os
+import sys
 import hashlib
 import datetime
+import logging
+#import tempfile
 # import 3th party
+import httplib2
 import sunburnt
 # import project modules
 from intrasol.conf import settings
@@ -14,26 +18,19 @@ def get_section_for_path(path):
             return section
     raise Exeption()
 
-__solrConnection = None
-
-@property
-def SolrConnection():
-    if __solrConnection == None:
-        # init sunburnt connection
-        __solrConnection = sunburnt.SolrInterface(settings.SOLR_URL, settings.SOLR_SCHEMA_PATH)
-    return __solrConnection
-
-
-__extractionMethod = None
 
 class File(object):
+    __solrConnection = None
+    __extractionMethod = None
 
     def __init__(self, path, section=None):
         self.logger = logging.getLogger("File")
         abspath =  os.path.abspath(path)
         if section == None:
             self.section = get_section_for_path(path)
-        self.path = abspath.replace(settings.SECTIONS[self.section]+"/")
+        else:
+            self.section = section
+        self.path = abspath.replace(settings.SECTIONS[self.section]+"/", "")
         self.id = "%s?%s" %  (self.section, self.path)
         stat = os.stat(abspath)
         self.logger.debug("File object inited %s" % str(self))
@@ -50,21 +47,36 @@ class File(object):
         return "intrasol.File[section=%s, path=%s]" % (self.section, self.path)
 
     def __extract(self):
-        self.logger.debug("start extraction of file(%s)" % str(file))
-        if __extractionMethod == None:
+        self.logger.debug("start extraction of file(%s)" % str(self))
+        if File.__extractionMethod == None:
             method_parts = settings.EXTRACTION_METHOD.split(".")
             method_name = method_parts.pop()
             method_path = ".".join(method_parts)
-            module = __import__(module_path)
-            __extractionMethod = getattr(module, method_name)
-        __extractionMethod(self)
+            module = __import__(method_path)
+            module = sys.modules[method_path]
+            File.__extractionMethod = getattr(module, method_name)
+        File.__extractionMethod(self)
         self.logger.debug("extraction of %s finished" % str(self))
+
+    def __solrConn(self):
+        if File.__solrConnection == None:
+            # get schema and init sunburnt connection
+            tmpfilename = os.tmpnam()
+            tmpfile = open(tmpfilename, mode="w+")
+            h = httplib2.Http()
+            resp, content = h.request(settings.SOLR_SCHEMA_PATH)
+            tmpfile.write(content)
+            tmpfile.close()
+            File.__solrConnection = sunburnt.SolrInterface(settings.SOLR_URL, tmpfilename)
+        return File.__solrConnection
+
 
     def update(self):
         self.__extract()
         self.logger.debug("updateing solr index with file(%s)" % str(self))
-        SolrConnection.add(self)
-        SolrConnection.commit()
+        conn = self.__solrConn()
+	conn.add(self)
+        conn.commit()
         self.logger.debug("updating of file(%s) finshed" % str(self))
 
 
