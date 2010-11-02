@@ -37,8 +37,10 @@ class File(object):
         self.id = "%s?%s" %  (self.section, self.path)
         stat = os.stat(abspath)
         self.logger.debug("File object inited %s" % str(self))
-        self.fmodified = stat.st_mtime
-        self.fcreated = stat.st_ctime
+        self.fmodified = datetime.datetime.fromtimestamp(stat.st_mtime)
+        self.fcreated = datetime.datetime.fromtimestamp(stat.st_ctime)
+        self.faccessed = datetime.datetime.fromtimestamp(stat.st_atime)
+        self.fsize = stat.st_size
         self.fowner = stat.st_uid
         self.fgroup = stat.st_gid
         self.author = ""
