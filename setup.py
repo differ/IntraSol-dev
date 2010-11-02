@@ -8,7 +8,7 @@ distutils.core.setup(
         description='easy to use intranet indexer',
         author='Oups It',
         author_email='oupsit@netmon.ch',
-        packages=['intrasol'],
+        packages=['intrasol', 'intrasol.extraction'],
         requires=['httplib2', 'sunburnt', 'simplejson', 'argparse'],
         scripts=['bin/intrasol-cli'],
         data_files = [

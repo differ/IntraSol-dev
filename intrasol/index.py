@@ -6,7 +6,7 @@ from conf import settings
 from conf import SettingsDefaults
 from file import File
 
-class CacheFile(file):
+class CacheFile(File):
     def update_index(self):
         # check if index is uptodate
         # how to index??
@@ -41,7 +41,7 @@ class Indexer:
         self.logger.debug("starting tree walk on path: "+path)
         tree = os.walk(path)
         for dir, subdirs, fnames in tree:
-            self.index_dir(dir, fnames, settings.SECTION)
+            self.index_dir(dir, fnames, section)
 
     def index_dir(self, dir, fnames=None, section="default"):
         #ToDo: Error handling

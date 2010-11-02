@@ -4,7 +4,7 @@ import os
 import simplejson
 import urllib2
 import mimetypes
-from conf import settings
+from intrasol.conf import settings
 
 
 def extract(file):
@@ -20,11 +20,11 @@ def extract(file):
     """
     #ToDo: logging and error handling
     abspath = os.path.join(settings.SECTIONS[file.section], file.path)
-    request = urllib2.Request(setttings.SOLR_CELL_URL + "?extractOnly=true&wt=json")
+    request = urllib2.Request(settings.SOLR_CELL_URL + "?extractOnly=true&wt=json")
     request.add_data(open(abspath).read())
     # add mimetype .. based on the mimetypes package
     mimetypes.init()
-    request.add_header("Content-type", mimtypes.guess_type(abspath)[0])
+    request.add_header("Content-type", mimetypes.guess_type(abspath)[0])
     try:
         json_response = urllib2.urlopen(request).read()
         result = simplejson.loads(json_response)

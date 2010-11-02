@@ -394,7 +394,7 @@
 
     <!-- since fields of this type are by default not stored or indexed,
          any data added to them will be ignored outright.  --> 
-    <fieldtype name="ignored" stored="false" indexed="false" multiValued="true" class="solr.StrField" /> 
+    <!--<fieldtype name="ignored" stored="false" indexed="false" multiValued="true" class="solr.StrField" /> -->
 
  </types>
 
@@ -477,7 +477,7 @@
         results by manufacturer.  copied from "manu" via copyField -->
    <field name="manu_exact" type="string" indexed="true" stored="false"/>
 
-   <field name="payloads" type="payloads" indexed="true" stored="true"/>
+   <!--<field name="payloads" type="payloads" indexed="true" stored="true"/>-->
 
    <!-- Uncommenting the following will create a "timestamp" field using
         a default value of "NOW" to indicate when each document was indexed.
@@ -512,7 +512,7 @@
 
    <dynamicField name="*_pi"  type="pint"    indexed="true"  stored="true"/>
 
-   <dynamicField name="ignored_*" type="ignored" multiValued="true"/>
+   <!--<dynamicField name="ignored_*" type="ignored" multiValued="true"/>-->
    <dynamicField name="attr_*" type="textgen" indexed="true" stored="true" multiValued="true"/>
 
    <dynamicField name="random_*" type="random" />
