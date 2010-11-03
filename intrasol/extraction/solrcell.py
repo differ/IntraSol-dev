@@ -1,5 +1,6 @@
 __author__ = 'ixtix'
 
+import sys
 import os
 import simplejson
 import urllib2
@@ -42,8 +43,8 @@ def extract(file):
         file.date = result['date']
         file.content_type = result['Content-Type']
         file.text = result['']
-    except e:
+    except:
         #log extraction failed..
         logger.error("could not extract file: %s" % str(file))
-        logger.error("extraction exception: %s" % str(e))
+        logger.error("extraction exception: %s" % sys.exc_info()[0])
 
