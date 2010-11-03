@@ -79,7 +79,7 @@ class File(object):
         self.__extract()
         self.logger.debug("updateing solr index with file(%s)" % str(self))
         conn = self.__solrConn()
-	    conn.add(self)
+        conn.add(self)
         conn.commit()
         self.logger.debug("updating of file(%s) finshed" % str(self))
 
