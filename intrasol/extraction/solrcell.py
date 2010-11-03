@@ -37,12 +37,12 @@ def extract(file):
         logger.debug("load response")
         result = simplejson.loads(json_response)
         logger.debug("file up the result: in to the file object")
-        file.author = result['author']
-        file.creator = result['creator']
-        file.generator = result['generator']
-        file.date = result['date']
-        file.content_type = result['Content-Type']
-        file.text = result['']
+        file.author = result.get('author', '')
+        file.creator = result.get('creator', '')
+        file.generator = result.get('generator', '')
+        file.date = result.get('date', '')
+        file.content_type = result.get('Content-Type', '')
+        file.text = result.get('', '')
     except:
         #log extraction failed..
         logger.error("could not extract file: %s" % str(file))
