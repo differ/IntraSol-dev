@@ -41,7 +41,7 @@ class Indexer:
         try:
             self.logger.debug("starting tree walk on path: "+path)
             tree = os.walk(path)
-            for dirname subdirs, fnames in tree:
+            for dirname, subdirs, fnames in tree:
                 self.index_dir(dirname, fnames, section)
         except:
             self.logger.error("error while indexing tree(%s) for section(%s). Exception - %s" % (path, section, sys.exc_info()[0]))
