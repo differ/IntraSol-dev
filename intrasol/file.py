@@ -51,16 +51,19 @@ class File(object):
         return "intrasol.File[section=%s, path=%s]" % (self.section, self.path)
 
     def __extract(self):
-        self.logger.debug("start extraction of file(%s)" % str(self))
-        if File.__extractionMethod == None:
-            method_parts = settings.EXTRACTION_METHOD.split(".")
-            method_name = method_parts.pop()
-            method_path = ".".join(method_parts)
-            module = __import__(method_path)
-            module = sys.modules[method_path]
-            File.__extractionMethod = getattr(module, method_name)
-        File.__extractionMethod(self)
-        self.logger.debug("extraction of %s finished" % str(self))
+        if self.fsize > 1000000:
+            self.logger.debug("start extraction of file(%s)" % str(self))
+            if File.__extractionMethod == None:
+                method_parts = settings.EXTRACTION_METHOD.split(".")
+                method_name = method_parts.pop()
+                method_path = ".".join(method_parts)
+                module = __import__(method_path)
+                module = sys.modules[method_path]
+                File.__extractionMethod = getattr(module, method_name)
+            File.__extractionMethod(self)
+            self.logger.debug("extraction of %s finished" % str(self))
+        else:
+            self.logger.debug("file is to big! skip extraction for %s" % str(file))
 
     def __solrConn(self):
         if File.__solrConnection == None:
