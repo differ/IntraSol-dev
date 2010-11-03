@@ -44,6 +44,8 @@ class File(object):
         self.creator = ""
         self.producer = ""
         self.content_type = ""
+        self.text = ""
+        self.date = ""
 
     def __str__(self):
         return "intrasol.File[section=%s, path=%s]" % (self.section, self.path)
@@ -77,7 +79,7 @@ class File(object):
         self.__extract()
         self.logger.debug("updateing solr index with file(%s)" % str(self))
         conn = self.__solrConn()
-	conn.add(self)
+	    conn.add(self)
         conn.commit()
         self.logger.debug("updating of file(%s) finshed" % str(self))
 

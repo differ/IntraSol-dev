@@ -4,7 +4,8 @@
     <list default="true" id="5704242b-ae60-41d8-91ec-23f6c5de2e4d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/schema.xml" afterPath="$PROJECT_DIR$/data/schema.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/intrasol/extraction/solrcell.py" afterPath="$PROJECT_DIR$/intrasol/extraction/solrcell.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/intrasol/conf.py" afterPath="$PROJECT_DIR$/intrasol/conf.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/intrasol/file.py" afterPath="$PROJECT_DIR$/intrasol/file.py" />
     </list>
     <ignored path="IntraSolr.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,7 +41,25 @@
       <file leaf-file-name="file.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/intrasol/file.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="47" selection-start="1387" selection-end="1387" vertical-scroll-proportion="0.0">
+            <state line="47" column="22" selection-start="1464" selection-end="1464" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="intrasol.conf.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/intrasol.conf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="conf.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/intrasol/conf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="8" selection-start="354" selection-end="354" vertical-scroll-proportion="0.21262887">
               <folding />
             </state>
           </provider>
@@ -55,10 +74,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="solrcell.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="solrcell.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/intrasol/extraction/solrcell.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="64" selection-start="1462" selection-end="1462" vertical-scroll-proportion="0.7152062">
+            <state line="37" column="64" selection-start="1462" selection-end="1462" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -110,9 +129,9 @@
         <option value="$PROJECT_DIR$/intrasol/main.py" />
         <option value="$PROJECT_DIR$/intrasol/index.py" />
         <option value="$PROJECT_DIR$/intrasol/extraction/__init__.py" />
-        <option value="$PROJECT_DIR$/intrasol/conf.py" />
-        <option value="$PROJECT_DIR$/intrasol/file.py" />
         <option value="$PROJECT_DIR$/intrasol/extraction/solrcell.py" />
+        <option value="$PROJECT_DIR$/intrasol/file.py" />
+        <option value="$PROJECT_DIR$/intrasol/conf.py" />
       </list>
     </option>
   </component>
@@ -157,6 +176,34 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="IntraSol" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IntraSol" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IntraSol" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="intrasol" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IntraSol" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IntraSol" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -387,21 +434,9 @@
         <state line="1" column="10" selection-start="32" selection-end="32" vertical-scroll-proportion="0.01981506" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/intrasol.conf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/intrasol/watch.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="96" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/intrasol/conf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="20" selection-start="707" selection-end="707" vertical-scroll-proportion="0.41284403">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/intrasol/index.py">
@@ -430,13 +465,6 @@
         <state line="0" column="21" selection-start="21" selection-end="21" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/intrasol/file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="47" selection-start="1387" selection-end="1387" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/intrasol/extraction/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -451,7 +479,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/intrasol/extraction/solrcell.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="64" selection-start="1462" selection-end="1462" vertical-scroll-proportion="0.7152062">
+        <state line="37" column="64" selection-start="1462" selection-end="1462" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/intrasol.conf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intrasol/file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="22" selection-start="1464" selection-end="1464" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intrasol/conf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="8" selection-start="354" selection-end="354" vertical-scroll-proportion="0.21262887">
           <folding />
         </state>
       </provider>

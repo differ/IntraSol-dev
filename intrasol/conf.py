@@ -9,8 +9,8 @@ class SettingsDefaults(object):
     SECTION = "ALL"
     # this shout be overwriten!!!
     SECTIONS = {
-        "srv": "/srv",
-        "www": "/var/www"
+        "srv": u"/srv",
+        "www": u"/var/www"
     }
     # Action settings
     WATCH_DEAMONIZE = True
