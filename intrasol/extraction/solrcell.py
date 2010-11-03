@@ -21,17 +21,18 @@ def extract(file):
        >>> result = simplejson.loads(ret.read())
     """
     #ToDo: logging and error handling
-    logger = logging.getLogger("SolrCell")
-    logger.debug("prepare for extraction of file: %s" % file)
-    abspath = os.path.join(settings.SECTIONS[file.section], file.path)
-    url = settings.SOLR_CELL_URL + "?extractOnly=true&wt=json"
-    request = urllib2.Request(url)
-    request.add_data(open(abspath).read())
-    # add mimetype .. based on the mimetypes package
-    mimetypes.init()
-    request.add_header("Content-type", mimetypes.guess_type(abspath)[0])
-    logger.debug("file has content-type: %s" % mimetypes.guess_type(abspath)[0])
-    try:
+    try
+        logger = logging.getLogger("SolrCell")
+        logger.debug("prepare for extraction of file: %s" % file)
+        abspath = os.path.join(settings.SECTIONS[file.section], file.path)
+        url = settings.SOLR_CELL_URL + "?extractOnly=true&wt=json"
+        request = urllib2.Request(url)
+        request.add_data(open(abspath).read())
+        # add mimetype .. based on the mimetypes package
+        mimetypes.init()
+        mimetype = mimetypes.guess_type(abspath)[0]
+        request.add_header("Content-type", mimetype)
+        logger.debug("file has content-type: %s" % mimetype)
         logger.debug("open request to url with file content")
         json_response = urllib2.urlopen(request).read()
         logger.debug("load response")
@@ -41,7 +42,7 @@ def extract(file):
         file.creator = result.get('creator', '')
         file.generator = result.get('generator', '')
         file.date = result.get('date', '')
-        file.content_type = result.get('Content-Type', '')
+        file.content_type = mimetype
         file.text = result.get('', '')
     except:
         #log extraction failed..
