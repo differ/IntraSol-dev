@@ -21,7 +21,7 @@ def extract(file):
        >>> result = simplejson.loads(ret.read())
     """
     #ToDo: logging and error handling
-    try
+    try:
         logger = logging.getLogger("SolrCell")
         logger.debug("prepare for extraction of file: %s" % file)
         abspath = os.path.join(settings.SECTIONS[file.section], file.path)
