@@ -4,6 +4,7 @@ import os
 import simplejson
 import urllib2
 import mimetypes
+import logging
 from intrasol.conf import settings
 
 
@@ -19,22 +20,30 @@ def extract(file):
        >>> result = simplejson.loads(ret.read())
     """
     #ToDo: logging and error handling
+    logger = logging.getLogger("SolrCell")
+    logger.debug("prepare for extraction of file: %s" % file)
     abspath = os.path.join(settings.SECTIONS[file.section], file.path)
-    request = urllib2.Request(settings.SOLR_CELL_URL + "?extractOnly=true&wt=json")
+    url = settings.SOLR_CELL_URL + "?extractOnly=true&wt=json"
+    request = urllib2.Request(url)
     request.add_data(open(abspath).read())
     # add mimetype .. based on the mimetypes package
     mimetypes.init()
     request.add_header("Content-type", mimetypes.guess_type(abspath)[0])
+    logger.debug("file has content-type: %s" % mimetypes.guess_type(abspath)[0])
     try:
+        logger.debug("open request to url with file content")
         json_response = urllib2.urlopen(request).read()
+        logger.debug("load response")
         result = simplejson.loads(json_response)
+        logger.debug("file up the result: in to the file object")
         file.author = result['author']
         file.creator = result['creator']
         file.generator = result['generator']
         file.date = result['date']
         file.content_type = result['Content-Type']
-        file.content = result['text']
-    except:
+        file.text = result['']
+    except e:
         #log extraction failed..
-        pass
+        logger.error("could not extract file: %s" % str(file))
+        logger.error("extraction exception: %s" % str(e))
 
