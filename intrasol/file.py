@@ -51,7 +51,7 @@ class File(object):
         return "intrasol.File[section=%s, path=%s]" % (self.section, self.path)
 
     def __extract(self):
-        if self.fsize > 1000000:
+        if self.fsize < 1000000000:
             self.logger.debug("start extraction of file(%s)" % str(self))
             if File.__extractionMethod == None:
                 method_parts = settings.EXTRACTION_METHOD.split(".")
