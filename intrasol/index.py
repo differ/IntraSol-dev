@@ -38,22 +38,25 @@ class Indexer:
         self.index_tree(path, section)
 
     def index_tree(self, path, section="default"):
-        self.logger.debug("starting tree walk on path: "+path)
-        tree = os.walk(path)
-        for dir, subdirs, fnames in tree:
-            self.index_dir(dir, fnames, section)
+        try:
+            self.logger.debug("starting tree walk on path: "+path)
+            tree = os.walk(path)
+            for dirname subdirs, fnames in tree:
+                self.index_dir(dirname, fnames, section)
+        except:
+            self.logger.error("error while indexing tree(%s) for section(%s). Exception - %s" % (path, section, sys.exc_info()[0]))
 
-    def index_dir(self, dir, fnames=None, section="default"):
+    def index_dir(self, dirname, fnames=None, section="default"):
         #ToDo: Error handling
-        self.logger.debug("indexing dir: %s" % dir)
+        self.logger.debug("indexing dir: %s" % dirname)
         if fnames == None:
             fnames = []
-            entries = os.listdir(dir)
+            entries = os.listdir(dirname)
             for entry in entries:
                 if not os.path.isdir(entry):
                     fnames.add(entry)
         for fname in fnames:
-            self.index(os.path.join(dir, fname), section)
+            self.index(os.path.join(dirname, fname), section)
 
     def index(self, fpath, section):
         #ToDo: Error handling
