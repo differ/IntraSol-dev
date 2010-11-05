@@ -68,13 +68,13 @@ class File(object):
     def __solrConn(self):
         if File.__solrConnection == None:
             # get schema and init sunburnt connection
-            tmpfilename = os.tmpnam()
-            tmpfile = open(tmpfilename, mode="w+")
-            h = httplib2.Http()
-            resp, content = h.request(settings.SOLR_SCHEMA_PATH)
-            tmpfile.write(content)
-            tmpfile.close()
-            File.__solrConnection = sunburnt.SolrInterface(settings.SOLR_URL, tmpfilename)
+            #tmpfilename = os.tmpnam()
+            #tmpfile = open(tmpfilename, mode="w+")
+            #h = httplib2.Http()
+            #resp, content = h.request(settings.SOLR_SCHEMA_PATH)
+            #tmpfile.write(content)
+            #tmpfile.close()
+            File.__solrConnection = sunburnt.SolrInterface(settings.SOLR_URL, settings.SOLR_SCHEMA_PATH)
         return File.__solrConnection
 
 
