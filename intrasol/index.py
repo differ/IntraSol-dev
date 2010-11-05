@@ -40,13 +40,13 @@ class Indexer:
 
     def index_tree(self, path, section="default"):
         try:
-            self.logger.debug("starting tree walk on path: "+path)
+            self.logger.debug("starting tree walk on path: '%s' with type=%s" % (path, type(path)))
             tree = os.walk(path)
             for dirname, subdirs, fnames in tree:
                 self.index_dir(dirname, fnames, section)
         except:
             exc_info = sys.exc_info()
-            self.logger.error("error while indexing tree(%s) for section(%s). Exception: %s Value: %s" % (path, section, exc_info[0], exc_info[1]))
+            self.logger.error("error while indexing tree(%s) for section(%s) last dirname (%s). Exception: %s Value: %s" % (path, section, dirname, exc_info[0], exc_info[1]))
 
     def index_dir(self, dirname, fnames=None, section="default"):
         #ToDo: Error handling
