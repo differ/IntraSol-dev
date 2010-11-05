@@ -26,12 +26,15 @@ class Indexer:
         # do the indexing
         #ToDo: Error handling
         self.logger.debug("start indexing")
-        if settings.SECTION.upper() == "ALL":
-            self.logger.info("start indexing all sections")
-            for section in settings.SECTIONS.keys():
-                self.index_section(section)
+        if settings.PATH == None:
+            if settings.SECTION.upper() == "ALL":
+                self.logger.info("start indexing all sections")
+                for section in settings.SECTIONS.keys():
+                    self.index_section(section)
+            else:
+                self.index_section(settings.SECTION)
         else:
-            self.index_section(settings.SECTION)
+            self.index_tree(settings.PATH, settings.SECTION)
 
     def index_section(self, section):
         self.logger.info("start indexing section: "+section)

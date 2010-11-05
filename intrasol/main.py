@@ -17,6 +17,7 @@ def main(argv):
     parser.add_argument("-v", "--verbose", default=SettingsDefaults.VERBOSE, action="store_true", dest="VERBOSE")
     parser.add_argument("-c", "--config", default=SettingsDefaults.CONFIG_FILE, type=str, dest="CONFIG_FILE", help="sets the configuration file of intrasol")
     parser.add_argument("-s", "--section", default=SettingsDefaults.SECTION, type=str, dest="SECTION", help="sets the categorie for the action")
+    parser.add_argument("-p", "--path", default=None, type=str, dest="PATH", help="overrides the path to index, care full this can create many mistakes")
     parser.add_argument("-ll", "--loglevel", default=SettingsDefaults.LOG_LEVEL, type=str, dest="LOG_LEVEL", help="sets the loglevel")
     parser.add_argument("-lf", "--logfile", default=SettingsDefaults.LOG_FILE, type=str, dest="LOG_FILE", help="defines a log file for the output")
     parser.add_argument("-el", "--errorlog", default=SettingsDefaults.ERROR_LOG, type=str, dest="ERROR_LOG", help="defines where the errorlog shout be")
