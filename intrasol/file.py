@@ -30,8 +30,8 @@ class File(object):
             self.section = get_section_for_path(path)
         else:
             self.section = section
-        self.path = abspath.replace(settings.SECTIONS[self.section]+"/", "")
-        self.id = "%s?%s" %  (self.section, self.path)
+        self.path = abspath.replace(settings.SECTIONS[self.section]+"/", "").decode("utf-8")
+        self.id = u"%s?%s" %  (self.section, self.path.decode("utf-8"))
         stat = os.stat(abspath)
         self.logger.debug("File object inited %s" % str(self))
         self.fmodified = datetime.datetime.fromtimestamp(stat.st_mtime)

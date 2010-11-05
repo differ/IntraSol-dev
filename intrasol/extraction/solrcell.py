@@ -24,7 +24,7 @@ def extract(file):
     try:
         logger = logging.getLogger("SolrCell")
         logger.debug("prepare for extraction of file: %s" % file)
-        abspath = os.path.join(settings.SECTIONS[file.section], file.path)
+        abspath = os.path.join(settings.SECTIONS[file.section], file.path.encode("utf-8"))
         url = settings.SOLR_CELL_URL + "?extractOnly=true&wt=json"
         request = urllib2.Request(url)
         request.add_data(open(abspath).read())
