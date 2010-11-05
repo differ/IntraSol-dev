@@ -46,6 +46,7 @@ def extract(file):
         file.text = result.get('', '')
     except:
         #log extraction failed..
+	exc_info = sys.exc_info()
         logger.error("could not extract file: %s" % str(file))
-        logger.error("extraction exception: %s" % sys.exc_info()[0])
+        logger.error("extraction exception: %s value: %s" % (exc_info[0], exc_info[1]))
 
