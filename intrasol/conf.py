@@ -9,8 +9,8 @@ class SettingsDefaults(object):
     SECTION = "ALL"
     # this shout be overwriten!!!
     SECTIONS = {
-        "srv": u"/srv",
-        "www": u"/var/www"
+        "srv": "/srv",
+        "www": "/var/www"
     }
     EXTRACTION_MAX_FILESIZE = 1000000000 # primitiv 1GB
     # Action settings
