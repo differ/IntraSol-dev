@@ -7,7 +7,7 @@ class SettingsDefaults(object):
     ERROR_LOG = "/var/log/intrasol/error.log"
     EXTRACTION_METHOD = "intrasol.extraction.solrcell.extract"
     SECTION = "ALL"
-    # this shout be overwriten!!!
+    # this shout be overwritten!!!
     SECTIONS = {
         "srv": "/srv",
         "www": "/var/www"
