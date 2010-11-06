@@ -30,7 +30,7 @@ class File(object):
             self.section = get_section_for_path(path)
         else:
             self.section = section
-        self.path = abspath.replace(settings.SECTIONS[self.section]+"/", "").decode("utf-8")
+        self.path = abspath.replace(settings.SECTIONS[self.section]+"/", "")
         self.id = u"%s?%s" %  (self.section, self.path.decode("utf-8"))
         stat = os.stat(abspath)
         self.logger.debug("File object inited %s" % str(self))
@@ -51,7 +51,7 @@ class File(object):
         return "intrasol.File[section=%s, path=%s]" % (self.section, self.path)
 
     def __extract(self):
-        if self.fsize < 1000000000:
+        if self.fsize < settings.EXTRACTION_MAX_FILESIZE:
             self.logger.debug("start extraction of file(%s)" % str(self))
             if File.__extractionMethod == None:
                 method_parts = settings.EXTRACTION_METHOD.split(".")
@@ -79,12 +79,16 @@ class File(object):
 
 
     def update(self):
-        self.__extract()
-        self.logger.debug("updateing solr index with file(%s)" % str(self))
-        conn = self.__solrConn()
-        conn.add(self)
-        conn.commit()
-        self.logger.debug("updating of file(%s) finshed" % str(self))
+        try:
+            self.__extract()
+            self.logger.debug("updateing solr index with file(%s)" % str(self))
+            conn = self.__solrConn()
+            conn.add(self)
+            conn.commit()
+            self.logger.debug("updating of file(%s) finshed" % str(self))
+        except:
+            exc_info = sys.exc_info()
+            self.logger.error("Error updating File: %s with Exception(%s: %s)" % (str(self), exc_info[0], exc_info[1]))
 
 
 

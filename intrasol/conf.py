@@ -12,6 +12,7 @@ class SettingsDefaults(object):
         "srv": u"/srv",
         "www": u"/var/www"
     }
+    EXTRACTION_MAX_FILESIZE = 1000000000
     # Action settings
     WATCH_DEAMONIZE = True
     WATCH_PID = "/var/run/intrasol.pid"
