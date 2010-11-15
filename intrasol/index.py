@@ -19,14 +19,16 @@ class CacheFile(File):
             if len(entries) == 1:
                 entry = entries[0]
                 if entry["fmodified"] <= self.fmodified:
-                    self.looger.debug("File (%s) is allready indexed" % str(self))
+                    self.logger.debug("File (%s) is allready indexed" % str(self))
                     conn.update({"id": self.id, "updated": datetime.datetime.now()})
                     conn.commit()
                 else:
+                    self.logger.debug("File (%s) is outdated force reindex" % str(self))
                     self.update()
             else:
                 self.update()
         except:
+            self.logger.debug("chache check throws exec, reindex the file") 
             self.update()
 
 class Indexer:
