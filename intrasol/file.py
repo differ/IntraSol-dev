@@ -59,7 +59,7 @@ class File(object):
     def __str__(self):
         return "intrasol.File[section=%s, path=%s]" % (self.section, self.path)
 
-    def __extract(self):
+    def extract(self):
         if self.fsize < settings.EXTRACTION_MAX_FILESIZE:
             self.logger.debug("start extraction of file(%s)" % str(self))
             if File.__extractionMethod == None:
@@ -74,7 +74,7 @@ class File(object):
         else:
             self.logger.debug("file is to big! skip extraction for %s" % str(file))
 
-    def __solrConn(self):
+    def solrConn(self):
         if File.__solrConnection == None:
             # get schema and init sunburnt connection
             #tmpfilename = os.tmpnam()
@@ -89,9 +89,9 @@ class File(object):
 
     def update(self):
         try:
-            self.__extract()
+            self.extract()
             self.logger.debug("updateing solr index with file(%s)" % str(self))
-            conn = self.__solrConn()
+            conn = self.solrConn()
             conn.add(self)
             conn.commit()
             self.logger.debug("updating of file(%s) finshed" % str(self))

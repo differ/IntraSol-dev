@@ -14,7 +14,7 @@ class CacheFile(File):
         # how to index??
         # self.update
         try:
-            conn = self.__solrConn()
+            conn = self.solrConn()
             entries = conn.query("", {"id": self.id}).execute().result.docs
             if len(entries) == 1:
                 entry = entries[0]
@@ -28,7 +28,8 @@ class CacheFile(File):
             else:
                 self.update()
         except:
-            self.logger.debug("chache check throws exec, reindex the file") 
+            exc_info = sys.exc_info()
+            self.logger.debug("chache check throws exec(%s: %s), reindex the file" % (exc_info[0], exc_info[1])) 
             self.update()
 
 class Indexer:
