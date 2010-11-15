@@ -22,7 +22,7 @@ class CacheFile(File):
                     self.looger.debug("File (%s) is allready indexed" % str(self))
                     conn.update({"id": self.id, "updated": datetime.datetime.now()})
                     conn.commit()
-                 else:
+                else:
                     self.update()
             else:
                 self.update()
