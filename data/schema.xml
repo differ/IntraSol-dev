@@ -443,6 +443,7 @@
    <!-- spezial fields used by intrasol -->
    <field name="path" type="string" indexed="true" stored="true"/>
    <field name="section" type="string" indexed="true" stored="true" />
+   <field name="updated" type="date" indexed="true" stored="true" />
    <field name="fmodified" type="date" indexed="true" stored="true" />
    <field name="fcreated" type="date" indexed="true" stored="true" />
    <field name="faccess" type="date" indexed="true" stored="true" />

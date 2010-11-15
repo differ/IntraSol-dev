@@ -3,6 +3,7 @@ __author__ = 'ixtix'
 import sys
 import os
 import logging
+import datetime
 from conf import settings
 from conf import SettingsDefaults
 from file import File
@@ -12,7 +13,18 @@ class CacheFile(File):
         # check if index is uptodate
         # how to index??
         # self.update
-        self.update()
+        try:
+            conn = self.__solrConn()
+            entries = conn.query("", {"id": self.id}).execute().result.docs
+            if len(entries) == 1:
+                entry = entries[0]
+                if entry["fmodified"] <= self.fmodified:
+                    conn.update({"id": self.id, "updated": datetime.datetime.now()})
+                    conn.commit()
+            else:
+                self.update()
+        except:
+            self.update()
 
 class Indexer:
     def __init__(self, subparsers):
@@ -26,6 +38,7 @@ class Indexer:
         # do the indexing
         #ToDo: Error handling
         self.logger.debug("start indexing")
+        setattr(settings, "START_DATE", datetime.datetime.now())
         if settings.PATH == None:
             if settings.SECTION.upper() == "ALL":
                 self.logger.info("start indexing all sections")
@@ -33,6 +46,7 @@ class Indexer:
                     self.index_section(section)
             else:
                 self.index_section(settings.SECTION)
+            # delete missing!!
         else:
             self.index_tree(settings.PATH, settings.SECTION)
 

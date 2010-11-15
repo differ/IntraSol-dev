@@ -38,11 +38,20 @@ def extract(file):
         logger.debug("load response")
         result = simplejson.loads(json_response)
         logger.debug("file up the result: in to the file object")
+        file.title = result.get('title', '')
+        file.subject = result.get('subject', '')
+        file.description = result.get('description', '')
+        file.comments = result.get('comments', '')
         file.author = result.get('author', '')
+        file.keywords = result.get('keywords', '')
+        file.category = result.get('category', '')
+        file.content_type = result.get('Content-Type', mimetype)
+        file.last_modified = result.get('last_modified', file.last_modified)
+        file.links = result.get('links', '')
         file.creator = result.get('creator', '')
         file.generator = result.get('generator', '')
         file.date = result.get('date', '')
-        file.content_type = mimetype
+        # and at last the main content of the file
         file.text = result.get('', '')
     except:
         #log extraction failed..

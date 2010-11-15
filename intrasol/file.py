@@ -34,18 +34,27 @@ class File(object):
         self.id = u"%s?%s" %  (self.section, self.path.decode("utf-8"))
         stat = os.stat(abspath)
         self.logger.debug("File object inited %s" % str(self))
+        self.updated = datetime.datetime.now()
         self.fmodified = datetime.datetime.fromtimestamp(stat.st_mtime)
         self.fcreated = datetime.datetime.fromtimestamp(stat.st_ctime)
         self.faccessed = datetime.datetime.fromtimestamp(stat.st_atime)
         self.fsize = stat.st_size
         self.fowner = stat.st_uid
         self.fgroup = stat.st_gid
-        self.author = ""
-        self.creator = ""
-        self.producer = ""
-        self.content_type = ""
-        self.text = ""
-        self.date = ""
+        self.title = ''
+        self.subject = ''
+        self.description = ''
+        self.comments = ''
+        self.author = ''
+        self.keywords = ''
+        self.category = ''
+        self.content_type = ''
+        self.last_modified = self.fmodified
+        self.links = ''
+        self.creator = ''
+        self.generator = ''
+        self.date = ''
+
 
     def __str__(self):
         return "intrasol.File[section=%s, path=%s]" % (self.section, self.path)
