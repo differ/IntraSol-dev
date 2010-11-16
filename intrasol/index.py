@@ -4,6 +4,7 @@ import sys
 import os
 import logging
 import datetime
+import hashlib
 from conf import settings
 from conf import SettingsDefaults
 from file import File
@@ -15,17 +16,20 @@ class CacheFile(File):
         # self.update
         try:
             conn = self.solrConn()
-            entries = conn.query("", {"id": self.id}).execute().result.docs
-            if len(entries) == 1:
+            entries = conn.query("", id=self.id).execute().result.docs
+            if len(entries) >= 1:
                 entry = entries[0]
-                if entry["fmodified"] <= self.fmodified:
-                    self.logger.debug("File (%s) is allready indexed" % str(self))
-                    conn.update({"id": self.id, "updated": datetime.datetime.now()})
+                fmodified = entry['fmodified'][0]._dt_obj
+                if fmodified.year == self.fmodified.year and fmodified.month == self.fmodified.month and fmodified.day == self.fmodified.day:
+                    self.logger.debug("File (%s) is allready indexed. update cache doc" % str(self))
+                    strid = "cache_%s" % hashlib.sha256(self.id).hexdigest()
+                    conn.add([{"id": strid, "path": self.path, "section": self.section, "updated": datetime.datetime.now()}])
                     conn.commit()
                 else:
                     self.logger.debug("File (%s) is outdated force reindex" % str(self))
                     self.update()
             else:
+                self.logger.debug("cache check returned %f objects! reindex file" % len(entries))
                 self.update()
         except:
             exc_info = sys.exc_info()

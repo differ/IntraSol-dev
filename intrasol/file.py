@@ -34,7 +34,8 @@ class File(object):
         self.id = u"%s?%s" %  (self.section, self.path.decode("utf-8"))
         stat = os.stat(abspath)
         self.logger.debug("File object inited %s" % str(self))
-        self.updated = datetime.datetime.now()
+        # no longer added just used for the cache documents
+        #self.updated = datetime.datetime.now()
         self.fmodified = datetime.datetime.fromtimestamp(stat.st_mtime)
         self.fcreated = datetime.datetime.fromtimestamp(stat.st_ctime)
         self.faccessed = datetime.datetime.fromtimestamp(stat.st_atime)
