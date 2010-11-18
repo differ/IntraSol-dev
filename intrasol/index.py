@@ -91,6 +91,10 @@ class Indexer:
         #ToDo: Error handling
         # push file to solr
         self.logger.debug("indexing file: %s" % fpath)
-        file = CacheFile(fpath, section)
-        file.update_index()
+        try:
+            file = CacheFile(fpath, section)
+            file.update_index()
+        except:
+            exc_info = sys.exc_info()
+            self.logger.error("Error %s with value: %s by indexing file %s" % (exc_info[0], exc_info[1], fpath))
 
